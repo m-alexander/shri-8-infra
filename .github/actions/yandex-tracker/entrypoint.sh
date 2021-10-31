@@ -9,7 +9,7 @@ existing=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
    -d "{\"filter\": {\"unique\": \"$TAG\"} }" \
    | jq -r '.[0].key')
 
-if [[ $existing = "null" ]]; then
+if test $existing = "null"; then
   echo 'Create new task'
   existing=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/" \
      -H "Content-Type: application/json" \
