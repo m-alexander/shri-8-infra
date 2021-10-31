@@ -33,8 +33,11 @@ fi
 DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
 echo $DESCRIPTION
 
+
 npm install
 TEST_RESULTS=$(npm test)
+
+echo $TEST_RESULTS
 
 TITLE="Version $TAG"
 
