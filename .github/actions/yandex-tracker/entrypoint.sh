@@ -4,7 +4,7 @@ TAG=$(git tag --sort version:refname | tail -n 2 | head -n 1)
 
 echo 'Check if task exists'
 
-
+############ CHECK TASK EXISTS
 response=$(curl -sS -X POST https://api.tracker.yandex.net/v2/issues/_search \
             -H "Content-Type: application/json" \
             -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
@@ -14,23 +14,14 @@ response=$(curl -sS -X POST https://api.tracker.yandex.net/v2/issues/_search \
 existing=$(echo $response | jq -r '.[0].key')
 
 
+############ GET TASK DESCRIPTION
+DESCRIPTION="
+$(git log -1 $TAG | grep 'Author\|Date')
+Version: $TAG
 
-echo 'Получаю автора и дату'
-header=$(git log -1 $TAG | grep 'Author\|Date')
-
-echo 'Получаю changelog'
-if [ "$TAG" ]; then
-  changelog=$(git log --oneline --no-decorate $TAG..HEAD)
-else
-  changelog=$(git log --oneline --no-decorate)
-fi
-
-
-DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
-
-
-npm install
-TEST_RESULTS=$(npm test)
+Changelog:
+$(git log --oneline --no-decorate $TAG..HEAD)
+"
 
 
 TITLE="Version $TAG"
@@ -42,9 +33,9 @@ BODY=$(jq -n \
           --arg description "$DESCRIPTION" \
            '$ARGS.named')
 
-echo $BODY
 
 if test "$existing" = "null"; then
+  ############ CREATE NEW TASK
   echo 'Create new task'
   response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/" \
        -H "Content-Type: application/json" \
@@ -56,6 +47,7 @@ if test "$existing" = "null"; then
 
   existing=$(echo $response | jq -r '.key')
 else
+  ############ UPDATE TASK
   echo 'Update task'
   response=$(curl -sS -X PATCH "https://api.tracker.yandex.net/v2/issues/$existing" \
     -H "Content-Type: application/json" \
@@ -66,7 +58,12 @@ else
   echo $response
 fi
 
+############ RUN TESTS AND ADD COMMENT
 echo 'Add tests result'
+
+npm install
+TEST_RESULTS=$(npm test | sed '/^>/d')
+
 BODY=$(jq -n  --arg text "$TEST_RESULTS" '$ARGS.named')
 
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/$existing/comments" \
