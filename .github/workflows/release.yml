@@ -30,17 +30,17 @@ jobs:
 #        uses: ./.github/actions/changelog
 #        id: changelog
 
-      - name: Tests
-        id: tests
-        run: echo "::set-output name=result::$(npm test)"
+#      - name: Tests
+#        id: tests
+#        run: echo "::set-output name=result::$(npm test)"
 #
 #      - name: Build the Docker image
 #        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
 
-      - name: Test
-        run: |
-          echo  ${{ steps.changelog.outputs.summary }}
-          echo  ${{ steps.tests.outputs.result }}
+#      - name: Test
+#        run: |
+#          echo  ${{ steps.changelog.outputs.summary }}
+#          echo  ${{ steps.tests.outputs.result }}
 
       - name: Create task
         uses: ./.github/actions/yandex-tracker
