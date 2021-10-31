@@ -15,7 +15,7 @@ if [[ $existing = "null" ]]; then
      -H "Content-Type: application/json" \
      -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
      -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
-     -d "{\"summary\": \"$TITLE\", \"queue\": \"$QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }" \
+     -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }" \
      | jq -r '.key')
 else
   echo 'Update task'
@@ -23,7 +23,7 @@ else
     -H "Content-Type: application/json" \
     -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
     -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
-    -d "{\"summary\": \"$TITLE\", \"queue\": \"$QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }" \
+    -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }" \
     | jq -r '.key')
 fi
 
