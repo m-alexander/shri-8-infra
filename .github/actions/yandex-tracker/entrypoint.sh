@@ -26,10 +26,6 @@ else
 fi
 
 
-#changelog="${changelog//'%'/'%25'}"
-#changelog="${changelog//$'\n'/'%0A' - }"
-#changelog=" - ${changelog//$'\r'/'%0D'}"
-
 DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
 
 
@@ -54,7 +50,7 @@ if test "$existing" = "null"; then
        -H "Content-Type: application/json" \
        -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
        -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
-       -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }")
+       -d "$BODY")
 
   echo $response
 
@@ -65,17 +61,19 @@ else
     -H "Content-Type: application/json" \
     -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
     -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
-    -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }")
+    -d "$BODY")
 
   echo $response
 fi
 
 echo 'Add tests result'
+BODY=$(jq -n  --arg text "$TEST_RESULTS" '$ARGS.named')
+
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/$existing/comments" \
      -H "Content-Type: application/json" \
      -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
      -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
-     -d "{\"text\": \"$TEST_RESULTS\" }")
+     -d "$BODY")
 
 echo $response
 
