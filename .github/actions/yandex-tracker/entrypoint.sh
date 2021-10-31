@@ -5,8 +5,8 @@ echo 'Check if task exists'
 
 response=$(curl -X POST https://api.tracker.yandex.net/v2/issues/_search \
               -H "Content-Type: application/json" \
-              -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
-              -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
+              -H "Authorization: OAuth AQAAAAADBdNFAAd47Vm91KDbOkMxhVSaFomrdCI" \
+              -H "X-Org-Id: 6461097" \
               -d '{"filter": {"unique": "123qwe"} }')
 
 echo $response
