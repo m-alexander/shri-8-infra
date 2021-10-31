@@ -26,9 +26,9 @@ else
 fi
 
 
-changelog="${changelog//'%'/'%25'}"
-changelog="${changelog//$'\n'/'%0A' - }"
-changelog=" - ${changelog//$'\r'/'%0D'}"
+#changelog="${changelog//'%'/'%25'}"
+#changelog="${changelog//$'\n'/'%0A' - }"
+#changelog=" - ${changelog//$'\r'/'%0D'}"
 
 DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
 echo $DESCRIPTION
