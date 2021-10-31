@@ -4,7 +4,7 @@ author: 'Alexander Mamutov'
 
 runs:
   using: 'node12'
-  main: ${{ github.action_path }}/main.js
+  main: ./main.js
 branding:
   icon: 'edit'
   color: 'gray-dark'
