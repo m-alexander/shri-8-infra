@@ -14,6 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
       - name: Build
         run: |
           npm install
@@ -35,7 +39,7 @@ jobs:
         shell: bash
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag infra:${{ github.ref }}
+        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
 
       - name: Create task
         uses: ./.github/actions/yandex-tracker
@@ -44,7 +48,7 @@ jobs:
           YANDEX_TRACKER_OAUTH: ${{ secrets.yandexTrackerOAuth }}
           YANDEX_TRACKER_ORG_ID: ${{ secrets.yandexTrackerOrgId }}
           YANDEX_TRACKER_QUEUE: ${{ secrets.yandexTrackerQueue }}
-          TAG: ${{ github.ref }}
+          TAG: ${{ steps.vars.outputs.tag }}
           TITLE: Version ${{ github.ref }}
           DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
           TEST_RESULTS: ${{ steps.Tests.outputs.result }}
