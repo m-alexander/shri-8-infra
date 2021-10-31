@@ -26,7 +26,7 @@ jobs:
           path: dist
 
       - name: Changelog
-        uses: ./.github/actions/print-summary
+        uses: ./.github/actions/changelog
         id: Summary
 
       - name: Tests
