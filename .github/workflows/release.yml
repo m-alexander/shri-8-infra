@@ -26,9 +26,9 @@ jobs:
 #          name: dist
 #          path: dist
 
-      - name: Changelog
-        uses: ./.github/actions/changelog
-        id: changelog
+#      - name: Changelog
+#        uses: ./.github/actions/changelog
+#        id: changelog
 
       - name: Tests
         id: tests
