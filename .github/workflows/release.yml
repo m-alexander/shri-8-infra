@@ -44,13 +44,12 @@ jobs:
       - name: Create task
         uses: ./.github/actions/yandex-tracker
         env:
-          REPO: ${{ github.repository }}
           YANDEX_TRACKER_OAUTH: ${{ secrets.yandexTrackerOAuth }}
           YANDEX_TRACKER_ORG_ID: ${{ secrets.yandexTrackerOrgId }}
           YANDEX_TRACKER_QUEUE: ${{ secrets.yandexTrackerQueue }}
           TAG: ${{ steps.vars.outputs.tag }}
           TITLE: Version ${{ steps.vars.outputs.tag }}
-#          DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
-#          TEST_RESULTS: ${{ steps.Tests.outputs.result }}
+          DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
+          TEST_RESULTS: ${{ steps.Tests.outputs.result }}
 
 
