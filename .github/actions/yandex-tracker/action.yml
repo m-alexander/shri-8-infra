@@ -3,8 +3,10 @@ description: 'GitHub Action for creating issue in task tracker'
 author: 'Alexander Mamutov'
 
 runs:
-  using: 'node12'
-  main: ./main.js
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
 branding:
   icon: 'edit'
   color: 'gray-dark'
