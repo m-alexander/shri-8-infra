@@ -41,8 +41,12 @@ jobs:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
 
+#      - name: Create task
+#        uses: ./.github/actions/yandex-tracker
       - name: Create task
-        uses: ./.github/actions/yandex-tracker
+        shell: bash
+        run: |
+          ./.github/actions/yandex-tracker/entrypoint.sh
         env:
           YANDEX_TRACKER_OAUTH: ${{ secrets.YANDEX_TRACKER_OAUTH }}
           YANDEX_TRACKER_ORG_ID: ${{ secrets.YANDEX_TRACKER_ORG_ID }}
