@@ -2,12 +2,14 @@
 
 echo 'Check if task exists'
 
-echo $YANDEX_TRACKER_ORG_ID
-echo $YANDEX_TRACKER_QUEUE
+
+echo "Authorization: OAuth $YANDEX_TRACKER_OAUTH"
+echo  "X-Org-Id: $YANDEX_TRACKER_ORG_ID"
+echo "{\"filter\": {\"unique\": \"$TAG\"} }"
 
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
    -H "Content-Type: application/json" \
-   -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
+   -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
    -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
    -d "{\"filter\": {\"unique\": \"$TAG\"} }")
 
@@ -19,7 +21,7 @@ if test "$existing" = "null"; then
   echo 'Create new task'
   response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/" \
        -H "Content-Type: application/json" \
-       -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
+       -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
        -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
        -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }")
 
@@ -30,7 +32,7 @@ else
   echo 'Update task'
   response=$(curl -sS -X PATCH "https://api.tracker.yandex.net/v2/issues/$existing" \
     -H "Content-Type: application/json" \
-    -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
+    -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
     -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
     -d "{\"summary\": \"$TITLE\", \"queue\": \"$YANDEX_TRACKER_QUEUE\", \"description\": \"$DESCRIPTION\", \"unique\": \"$TAG\" }")
 
@@ -40,7 +42,7 @@ fi
 echo 'Add tests result'
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/$existing/comments" \
      -H "Content-Type: application/json" \
-     -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
+     -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
      -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
      -d "{\"text\": \"$TEST_RESULTS\" }")
 
