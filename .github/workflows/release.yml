@@ -1,7 +1,4 @@
-on:
-  push:
-    tags:
-      - 'v*'
+on: push
 name: Create Release
 
 jobs:
@@ -11,10 +8,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Set output
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
@@ -31,12 +24,12 @@ jobs:
 
       - name: Changelog
         uses: ./.github/actions/changelog
-        id: Summary
+        id: Changelog
 
-#      - name: Tests
-#        id: Tests
-#        run: echo "::set-output name=result::$(npm test)"
-#        shell: bash
+      - name: Tests
+        id: Tests
+        run: echo "::set-output name=result::$(npm test)"
+        shell: bash
 #
 #      - name: Build the Docker image
 #        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}

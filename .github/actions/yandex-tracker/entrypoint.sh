@@ -1,11 +1,9 @@
 #!/bin/sh -l
 
+echo $DESCRIPTION
+echo $TEST_RESULTS
+
 echo 'Check if task exists'
-
-
-echo "Authorization: OAuth $YANDEX_TRACKER_OAUTH"
-echo  "X-Org-Id: $YANDEX_TRACKER_ORG_ID"
-echo "{\"filter\": {\"unique\": \"$TAG\"} }"
 
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
    -H "Content-Type: application/json" \
