@@ -1,0 +1,12 @@
+name: 'yandex-tracker'
+description: 'GitHub Action for creating issue in task tracker'
+author: 'Alexander Mamutov'
+outputs:
+  summary:
+    description: 'Create issue in task tracker'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'edit'
+  color: 'gray-dark'
