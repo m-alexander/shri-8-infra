@@ -16,11 +16,11 @@ existing=$(echo $response | jq -r '.[0].key')
 
 
 echo 'Получаю автора и дату'
-header=$(git log -1 $tag | grep 'Author\|Date')
+header=$(git log -1 $TAG | grep 'Author\|Date')
 
 echo 'Получаю changelog'
-if [ "$tag" ]; then
-  changelog=$(git log --oneline --no-decorate $tag..HEAD)
+if [ "$TAG" ]; then
+  changelog=$(git log --oneline --no-decorate $TAG..HEAD)
 else
   changelog=$(git log --oneline --no-decorate)
 fi
@@ -32,7 +32,7 @@ changelog=" - ${changelog//$'\r'/'%0D'}"
 
 DESCRIPTION="
 $header
-Version: $tag
+Version: $TAG
 
 Changelog:
 $changelog
@@ -40,6 +40,8 @@ $changelog
 
 npm install
 TEST_RESULTS=$(npm test)
+
+TITLE="Version $TAG"
 
 if test "$existing" = "null"; then
   echo 'Create new task'

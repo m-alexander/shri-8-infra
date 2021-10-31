@@ -48,8 +48,4 @@ jobs:
           YANDEX_TRACKER_OAUTH: ${{ secrets.YANDEX_TRACKER_OAUTH }}
           YANDEX_TRACKER_ORG_ID: ${{ secrets.YANDEX_TRACKER_ORG_ID }}
           YANDEX_TRACKER_QUEUE: ${{ secrets.YANDEX_TRACKER_QUEUE }}
-          TAG: ${{ steps.vars.outputs.tag }}
-          TITLE: Version ${{ steps.vars.outputs.tag }}
-          DESCRIPTION: ${{ steps.changelog.outputs.summary }}
-          TEST_RESULTS: ${{ steps.tests.outputs.result }}
 
