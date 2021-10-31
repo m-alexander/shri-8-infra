@@ -3,10 +3,13 @@
 
 echo 'Check if task exists'
 
+echo "!$YANDEX_TRACKER_OAUTH!"
+echo "!$YANDEX_TRACKER_ORG_ID!"
+
 response=$(curl -X POST https://api.tracker.yandex.net/v2/issues/_search \
               -H "Content-Type: application/json" \
-              -H "Authorization: OAuth AQAAAAADBdNFAAd47Vm91KDbOkMxhVSaFomrdCI" \
-              -H "X-Org-Id: 6461097" \
+              -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
+              -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
               -d '{"filter": {"unique": "123qwe"} }')
 
 echo $response
