@@ -15,12 +15,13 @@ existing=$(echo $response | jq -r '.[0].key')
 
 
 ############ GET TASK DESCRIPTION
+PREV_TAG=$(git tag --sort version:refname | tail -n 2 | head -n 1)
 DESCRIPTION="
 $(git log -1 $TAG | grep 'Author\|Date')
 Version: $TAG
 
 Changelog:
-$(git log --oneline --no-decorate $TAG..HEAD)
+$(git log --oneline --no-decorate $PREV_TAG..$TAG)
 "
 
 
