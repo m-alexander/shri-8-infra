@@ -7,8 +7,8 @@ const options = {
     method: 'POST',
     headers: {
         "Content-Type": "application/json",
-        "Authorization": "OAuth " + process.env.YANDEX_TRACKER_OAUTH,
-        "X-Org-Id": process.env.YANDEX_TRACKER_ORG_ID,
+        "Authorization": "OAuth AQAAAAADBdNFAAd47Vm91KDbOkMxhVSaFomrdCI",
+        "X-Org-Id": "6461097",
     },
     body: JSON.stringify({
         filter: { unique: '123qwe' }
