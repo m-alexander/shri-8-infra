@@ -22,21 +22,17 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist-without-markdown
+          name: dist
           path: dist
 
       - name: Changelog
         uses: ./.github/actions/print-summary
         id: Summary
-        env:
-          REPO: ${{ github.repository }}
-          TAG: ${{ github.ref }}
 
       - name: Tests
-        uses: ./.github/actions/jest-result
         id: Tests
-        env:
-          REPO: ${{ github.repository }}
+        run: echo "::set-output name=result::$(npm test)"
+        shell: bash
 
       - name: Create task
         uses: ./.github/actions/yandex-tracker
