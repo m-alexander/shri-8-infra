@@ -31,15 +31,22 @@ fi
 #changelog=" - ${changelog//$'\r'/'%0D'}"
 
 DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
-echo $DESCRIPTION
 
 
 npm install
 TEST_RESULTS=$(npm test)
 
-echo $TEST_RESULTS
 
 TITLE="Version $TAG"
+
+BODY=$(jq -n \
+          --arg summary "$TITLE" \
+          --arg queue "$YANDEX_TRACKER_QUEUE" \
+          --arg unique "$TAG" \
+          --arg description "$DESCRIPTION" \
+           '$ARGS.named')
+
+echo $BODY
 
 if test "$existing" = "null"; then
   echo 'Create new task'
