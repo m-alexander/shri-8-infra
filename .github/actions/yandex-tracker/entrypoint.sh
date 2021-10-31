@@ -5,7 +5,7 @@ echo $TEST_RESULTS
 
 echo 'Check if task exists'
 
-response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
+response=$(curl  -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
    -H "Content-Type: application/json" \
    -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
    -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
