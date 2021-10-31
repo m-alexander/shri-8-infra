@@ -34,6 +34,9 @@ jobs:
         run: echo "::set-output name=result::$(npm test)"
         shell: bash
 
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag infra:${{ github.ref }}
+
       - name: Create task
         uses: ./.github/actions/yandex-tracker
         env:
@@ -46,5 +49,4 @@ jobs:
           DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
           TEST_RESULTS: ${{ steps.Tests.outputs.result }}
 
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
