@@ -37,12 +37,8 @@ jobs:
 #      - name: Build the Docker image
 #        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
 
-#      - name: Create task
-#        uses: ./.github/actions/yandex-tracker
       - name: Create task
-        shell: bash
-        run: |
-          ./.github/actions/yandex-tracker/entrypoint.sh
+        uses: ./.github/actions/yandex-tracker
         env:
           YANDEX_TRACKER_OAUTH: ${{ secrets.YANDEX_TRACKER_OAUTH }}
           YANDEX_TRACKER_ORG_ID: ${{ secrets.YANDEX_TRACKER_ORG_ID }}
@@ -51,5 +47,3 @@ jobs:
           TITLE: Version ${{ steps.vars.outputs.tag }}
           DESCRIPTION: ${{ steps.changelog.outputs.summary }}
           TEST_RESULTS: ${{ steps.tests.outputs.result }}
-
-
