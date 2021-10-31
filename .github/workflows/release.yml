@@ -28,12 +28,11 @@ jobs:
 
       - name: Changelog
         uses: ./.github/actions/changelog
-        id: Changelog
+        id: changelog
 
       - name: Tests
-        id: Tests
+        id: tests
         run: echo "::set-output name=result::$(npm test)"
-        shell: bash
 #
 #      - name: Build the Docker image
 #        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
@@ -50,7 +49,7 @@ jobs:
           YANDEX_TRACKER_QUEUE: ${{ secrets.YANDEX_TRACKER_QUEUE }}
           TAG: ${{ steps.vars.outputs.tag }}
           TITLE: Version ${{ steps.vars.outputs.tag }}
-          DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
-          TEST_RESULTS: ${{ steps.Tests.outputs.result }}
+          DESCRIPTION: ${{ steps.changelog.outputs.summary }}
+          TEST_RESULTS: ${{ steps.tests.outputs.result }}
 
 
