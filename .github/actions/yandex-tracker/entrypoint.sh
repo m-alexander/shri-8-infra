@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG=$(git tag --sort version:refname | tail -n 2 | head -n 1)
+TAG=$(git tag --sort version:refname | tail -n 1)
 
 echo 'Check if task exists'
 
