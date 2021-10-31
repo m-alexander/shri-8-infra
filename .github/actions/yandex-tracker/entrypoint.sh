@@ -12,6 +12,12 @@ curl -v -X POST https://api.tracker.yandex.net/v2/issues/_search \
               -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
               -d "{\"filter\": {\"unique\": \"123qwe\"} }"
 
+curl -X POST https://api.tracker.yandex.net/v2/issues/_search \
+   -H 'Content-Type: application/json' \
+   -H 'Authorization: OAuth AQAAAAADBdNFAAd47Vm91KDbOkMxhVSaFomrdCI' \
+   -H 'X-Org-Id: 6461097' \
+   -d '{"filter": {"unique": "123qwe"} }'
+
 echo $response
 
 #existing=$(echo $response | jq -r '.[0].key')
