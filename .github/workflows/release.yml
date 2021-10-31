@@ -49,8 +49,8 @@ jobs:
           YANDEX_TRACKER_ORG_ID: ${{ secrets.yandexTrackerOrgId }}
           YANDEX_TRACKER_QUEUE: ${{ secrets.yandexTrackerQueue }}
           TAG: ${{ steps.vars.outputs.tag }}
-          TITLE: Version ${{ github.ref }}
-          DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
-          TEST_RESULTS: ${{ steps.Tests.outputs.result }}
+          TITLE: Version ${{ steps.vars.outputs.tag }}
+#          DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
+#          TEST_RESULTS: ${{ steps.Tests.outputs.result }}
 
 
