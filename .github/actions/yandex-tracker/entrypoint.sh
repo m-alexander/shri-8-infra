@@ -30,13 +30,8 @@ changelog="${changelog//'%'/'%25'}"
 changelog="${changelog//$'\n'/'%0A' - }"
 changelog=" - ${changelog//$'\r'/'%0D'}"
 
-DESCRIPTION="
-$header
-Version: $TAG
-
-Changelog:
-$changelog
-"
+DESCRIPTION="$header\nVersion: $TAG\nChangelog:\n$changelog"
+echo $DESCRIPTION
 
 npm install
 TEST_RESULTS=$(npm test)
