@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh -l
 
 echo 'Получаю tag'
 tag=$(git tag --sort version:refname | tail -n 2 | head -n 1)

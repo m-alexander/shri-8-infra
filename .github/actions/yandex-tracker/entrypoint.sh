@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh -l
 
 echo 'Check if task exists'
 
