@@ -7,10 +7,10 @@ echo "!$YANDEX_TRACKER_OAUTH!"
 echo "!$YANDEX_TRACKER_ORG_ID!"
 
 curl -v -X POST https://api.tracker.yandex.net/v2/issues/_search \
-              -H 'Content-Type: application/json' \
-              -H 'Authorization: OAuth $YANDEX_TRACKER_OAUTH' \
-              -H 'X-Org-Id: $YANDEX_TRACKER_ORG_ID' \
-              -d '{"filter": {"unique": "123qwe"} }'
+              -H "Content-Type: application/json" \
+              -H "Authorization: OAuth $YANDEX_TRACKER_OAUTH" \
+              -H "X-Org-Id: $YANDEX_TRACKER_ORG_ID" \
+              -d "{\"filter\": {\"unique\": \"123qwe\"} }"
 
 echo $response
 
