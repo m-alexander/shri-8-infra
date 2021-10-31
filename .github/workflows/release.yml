@@ -50,3 +50,5 @@ jobs:
           DESCRIPTION: ${{ steps.Changelog.outputs.summary }}
           TEST_RESULTS: ${{ steps.Tests.outputs.result }}
 
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
