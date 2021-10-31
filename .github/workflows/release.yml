@@ -37,6 +37,11 @@ jobs:
 #      - name: Build the Docker image
 #        run: docker build . --file Dockerfile --tag infra:${{ steps.vars.outputs.tag }}
 
+      - name: Test
+        run: |
+          echo  ${{ steps.changelog.outputs.summary }}
+          echo  ${{ steps.tests.outputs.result }}
+
       - name: Create task
         uses: ./.github/actions/yandex-tracker
         env:
