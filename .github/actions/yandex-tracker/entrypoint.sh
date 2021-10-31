@@ -2,6 +2,9 @@
 
 echo 'Check if task exists'
 
+echo $YANDEX_TRACKER_ORG_ID
+echo $YANDEX_TRACKER_QUEUE
+
 response=$(curl -sS -X POST "https://api.tracker.yandex.net/v2/issues/_search" \
    -H "Content-Type: application/json" \
    -H "Authorization: OAuth ${YANDEX_TRACKER_OAUTH}" \
