@@ -38,6 +38,7 @@ Changelog:
 $changelog
 "
 
+npm install
 TEST_RESULTS=$(npm test)
 
 if test "$existing" = "null"; then
