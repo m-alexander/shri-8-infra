@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cp src/* dist/",
+    "build": "rm -rf dist && mkdir dist && cp src/* dist/",
     "test": "jest --reporters=jest-standard-reporter"
   },
   "keywords": [],
